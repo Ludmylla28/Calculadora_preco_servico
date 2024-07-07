@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Preço de Tatuagem</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Preço de Tatuagem</h1>
+        <form action="/calcular" method="POST">
+            <label for="qtdAgulhas">Quantidade de Agulhas:</label>
+            <input type="number" id="qtdAgulhas" name="qtdAgulhas" step="1" required>
+
+            <p><label for="tamanho">Tamanho da Tatuagem (cm):</label>
+            <input type="number" id="tamanho" name="tamanho" step="0.1" required></p>
+
+            <p><label for="tempoMinutos">Tempo para Fazer a Tatuagem (minutos):</label>
+            <input type="number" id="tempoMinutos" name="tempoMinutos" step="1" required></p>
+
+            <p><label for="cores">A Tatuagem é Colorida?</label>
+            <select id="cores" name="cores" required>
+                <option value="preto-branco">Preto e Branco</option>
+                <option value="colorida">Colorida</option>
+            </select></p>
+
+            <p><label for="coresQuantidade">Quantidade de Cores (se colorida):</label>
+            <input type="number" id="coresQuantidade" name="coresQuantidade" step="1" min="0"></p>
+
+            <p><label for="estilo">Estilo da Tatuagem:</label>
+            <select id="estilo" name="estilo" required>
+                <option value="Pb solido">Pb sólido</option>
+                <option value="Pb sombreado">Pb sombreado</option>
+                <option value="solido">Sólido</option>
+                <option value="Degrade">Degradê</option>
+                <option value="gliter">Gliter</option>
+                <option value="aquarela">Aquarela</option>
+                <option value="realismo">Realismo</option>
+                <option value="patch (bordado)">Patch (bordado)</option>
+                <option value="Stiker">Stiker</option>
+                <option value="stiker holografico">Stiker holográfico</option>
+                <option value="UV">UV</option>
+            </select></p>
+
+            <button type="submit">Calcular Preço</button>
+        </form>
+
+        <% if (typeof precoFinal !== 'undefined') { %>
+        <div class="resultado">
+            <h2>Resultado</h2>
+            <p>Quantidade de Agulhas: <%= qtdAgulhas %></p>
+            <p>Tamanho da Tatuagem: <%= tamanho %> cm</p>
+            <p>Tempo para Fazer: <%= tempoMinutos %> minutos</p>
+            <p>Tatuagem <%= cores %></p>
+            <% if (cores === 'colorida') { %>
+                <p>Quantidade de Cores: <%= coresQuantidade %></p>
+            <% } %>
+            <p>Estilo: <%= estilo %></p>
+            <p>Custo Total: R$ <%= custoTotal %></p>
+            <p>Margem de Lucro: <%= margemLucro %> %</p>
+            <p>Preço Final: R$ <%= precoFinal %></p>
+        </div>
+        <% } %>
+    </div>
+</body>
+</html>
